@@ -1,0 +1,126 @@
+{
+  "name": "MapServer",
+  "scopeName": "source.mapserver",
+  "fileTypes": ["map","sym"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#block-keywords" },
+    { "include": "#strings" },
+    { "include": "#property-keywords" },
+    { "include": "#constants" },
+    { "include": "#operators" },
+    { "include": "#numbers" }
+    ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.mapserver",
+          "match": "#.*$"
+        },
+        {
+          "begin": "\/\\*",
+          "end": "\\*\/",
+          "name": "comment.block"
+        }
+      ]
+    },
+    "block-keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.block.mapserver",
+          "match": "(?i)\\b(END|CLASS|CLUSTER|COMPOSITE|CONNECTIONOPTIONS|FEATURE|GRID|JOIN|LABEL|LAYER|LEADER|LEGEND|MAP|METADATA|OUTPUTFORMAT|PATTERN|POINTS|PROJECTION|QUERYMAP|REFERENCE|SCALEBAR|SCALETOKEN|STYLE|SYMBOL|VALIDATION|WEB)\\b"
+        },
+        {
+          "name": "keyword.control.end.mapserver",
+          "match": "(?i)\\bEND\\b"
+        }
+      ]
+    },
+    "property-keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.property.mapserver",
+          "match": "(?i)\\b(ALIGN|ANCHORPOINT|ANGLE|ANGLEITEM|ANTIALIAS|BACKGROUNDCOLOR|BANDSITEM|BINDVALS|BOM|BROWSEFORMAT|BUFFER|CHARACTER|CLASSGROUP|CLASSITEM|COLOR|COLORRANGE|COMPFILTER|COMPOSITE|COMPOP|CONFIG|CONNECTION|CONNECTIONTYPE|DATA|DATAPATTERN|DATARANGE|DEBUG|DRIVER|EMPTY|ENCODING|ERROR|EXPRESSION|EXTENT|EXTENSION|FEATURE|FILLED|FILTER|FILTERITEM|FONT|FONTSET|FOOTER|FORCE|FORMATOPTION|FROM|GAP|GEOMTRANSFORM|GRATICULE|GRIDSTEP|GROUP|HEADER|IMAGE|IMAGECOLOR|IMAGEMODE|IMAGEPATH|IMAGEURL|IMAGETYPE|INCLUDE|INITIALGAP|INTERLACE|INTERVALS|ITEMS|KEYIMAGE|KEYSIZE|KEYSPACING|LABELANGLEITEM|LABELCACHE|LABELFORMAT|LABELITEM|LABELMAXSCALE|LABELMAXSCALEDENOM|LABELMINSCALE|LABELMINSCALEDENOM|LABELREQUIRES|LABELSIZEITEM|LINECAP|LINEJOIN|LINEJOINMAXSIZE|LOG|MARKER|MARKERSIZE|MASK|MAXARCS|MAXBOXSIZE|MAXFEATURES|MAXGEOWIDTH|MAXINTERVAL|MAXLENGTH|MAXOVERLAPANGLE|MAXSCALE|MAXSCALEDENOM|MAXSIZE|MAXSUBDIVIDE|MAXTEMPLATE|MAXWIDTH|MIMETYPE|MINBOXSIZE|MINDISTANCE|MINFEATURESIZE|MINGEOWIDTH|MININTERVAL|MINSCALE|MINSCALEDENOM|MINSIZE|MINSUBDIVIDE|MINTEMPLATE|MINWIDTH|NAME|OFFSET|OFFSITE|OPACITY|OUTLINECOLOR|OUTLINEWIDTH|OVERLAYBACKGROUNDCOLOR|OVERLAYCOLOR|OVERLAYMAXSIZE|OVERLAYMINSIZE|OVERLAYOUTLINECOLOR|OVERLAYSIZE|OVERLAYSYMBOL|PARTIALS|PLUGIN|POLAROFFSET|POSITION|POSTLABELCACHE|PRIORITY|PROCESSING|QUERYITEM|RANGEITEM|REPEATDISTANCE|REQUIRES|RESOLUTION|SCALE|SHADOWCOLOR|SHADOWSIZE|SHAPEPATH|SIZE|SIZEUNITS|SPACING|STATUS|STYLED|STYLEITEM|SYMBOLSCALE|SYMBOLSCALEDENOM|SYMBOLSET|TABLE|TEMPLATE|TEMPLATEPATTERN|TEXT|TILEINDEX|TILEITEM|TO|TOLERANCE|TOLERANCEUNITS|TRANSFORM|TRANSPARENCY|TRANSPARENT|TYPE|UNITS|UTFDATA|UTFITEM|WIDTH|WKT|WRAP)\\b"
+        },
+        {
+            "name": "variable.parameter",
+            "match": "(?i)\\b(AGG|AGGA|APPLICATION|AUTO|AUTO2|BEVEL|BITMAP|BUTT|BYTE|CAIRO|CC|CENTER|CHART|CIRCLE|CL|CONTOUR|CR|CSV|DD|DDMM|DDMMSS|DEFAULT|ELLIPSE|EMBED|FALSE|FEET|FLOAT32|FOLLOW|GD|GIANT|GIF|GTIFF|HATCH|HILITE|INCHES|INT16|INTERLACE|JPEG|KERNELDENSITY|KILOMETERS|KML|KMZ|LARGE|LC|LINE|LL|LOCAL|LR|MEDIUM|METERS|MILES|MITER|MIXED|MULTIPLE|MYGIS|MYSQL|NAUTICALMILES|NORMAL|OFF|OGR|ON|ONE-TO-MANY|ONE-TO-ONE|ORACLESPATIAL|PC256|PIXELS|PIXMAP|PNG|POINT|POLYGON|POSTGIS|POSTGRESQL|QUERY|RASTER|RGB|RGBA|ROUND|SDE|SELECTED|SIMPLE|SINGLE|SMALL|SQUARE|SVG|SWF|TINY|TRUE|TRUETYPE|UC|UL|UNION|UNION_SCALE_CHECK|UNION_SRCLAYER_CLOSE_CONNECTION|UNION_STATUS_CHECK|UR|UVRASTER|VALUES|VECTOR|VMS|WBMP|WFS|WMS|X-SHOCKWAVE-FLASH|XMP)\\b"
+        }
+      ]
+    },
+  
+    "strings": {
+      "patterns": [
+       
+        {
+          "name": "string.quoted.double.mapserver",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.mapserver",
+               "match": "\\\\."
+            },
+            {
+              "match": "\\b(angle|bbox_pixel_is_point|gml_[a-z_]+_alias|gml_[a-z_]+_group|gml_[a-z_]+_occurances|gml_[a-z_]+_precision|gml_[a-z_]+_type|gml_[a-z_]+_value|gml_[a-z_]+_width|gml_constants|gml_default_items|gml_exclude_items|gml_featureid|gml_geometries|gml_groups|gml_include_items|gml_mandatory_items|gml_optional_items|gml_types|gml_xml_items|labelcache_map_edge_buffer|ms_enable_modes|ows_allowed_ip_list|ows_denied_ip_list|ows_enable_request|ows_http_max_age|ows_language|ows_onlineresource|ows_schemas_location|ows_sld_enabled|ows_srs|ows_title|ows_updatesequence|radius|sos_[a-z_]+_alias|sos_[a-z_]+_definition|sos_[a-z_]+_uom|sos_abstract|sos_accessconstraints|sos_address|sos_addresstype|sos_allowed_ip_list|sos_city|sos_contactelectronicmailaddress|sos_contactfacsimiletelephone|sos_contactinstructions|sos_contactorganization|sos_contactperson|sos_contactposition|sos_contactvoicetelephone|sos_country|sos_denied_ip_list|sos_describesensor_url|sos_enable_request|sos_encoding_blockSeparator|sos_encoding_tokenSeparator|sos_fees|sos_hoursofservice|sos_keywordlist|sos_maxfeatures|sos_observedproperty_authority|sos_observedproperty_id|sos_observedproperty_name|sos_observedproperty_version|sos_offering_description|sos_offering_extent|sos_offering_id|sos_offering_intendedapplication|sos_offering_name|sos_offering_timeextent|sos_onlineresource|sos_postcode|sos_procedure|sos_procedure_item|sos_role|sos_service_onlineresource|sos_srs|sos_stateorprovince|sos_timeitem|sos_title|wcs_abstract|wcs_accessconstraints|wcs_address|wcs_allowed_ip_list|wcs_city|wcs_contactelectronicmailaddress|wcs_contactfacimiletelephone|wcs_contactorganization|wcs_contactperson|wcs_contactposition|wcs_contactvoicetelephone|wcs_country|wcs_denied_ip_list|wcs_description|wcs_enable_request|wcs_extent|wcs_fees|wcs_formats|wcs_keywords|wcs_label|wcs_metadatalink_format|wcs_metadatalink_href|wcs_metadatalink_type|wcs_name|wcs_native_format|wcs_nativeformat|wcs_postcode|wcs_rangeset_axes|wcs_rangeset_label|wcs_rangeset_name|wcs_responsibleparty_address_administrativearea|wcs_responsibleparty_address_city|wcs_responsibleparty_address_country|wcs_responsibleparty_address_deliverypoint|wcs_responsibleparty_address_electronicmailaddress|wcs_responsibleparty_address_postalcode|wcs_responsibleparty_individualname|wcs_responsibleparty_onlineresource|wcs_responsibleparty_organizationname|wcs_responsibleparty_phone_facsimile|wcs_responsibleparty_phone_voice|wcs_responsibleparty_postionname|wcs_service_onlineresource|wcs_srs|wcs_stateorprovince|wcs_timeitem|wcs_timeposition|wfs_[a-z_]+_filedef|wfs_[a-z_]+_inlinedef|wfs_abstract|wfs_accessconstraints|wfs_allowed_ip_list|wfs_auth_[a-z_]+|wfs_enable_request|wfs_compute_number_matched|wfs_denied_ip_list|wfs_encoding|wfs_extent|wfs_feature_collection|wfs_featureid|wfs_fees|wfs_getcapabilities_version|wfs_getfeature_formatlist|wfs_include_items|wfs_keywordlist|wfs_languages|wfs_maxfeatures|wfs_metadataurl_about|wfs_metadataurl_format|wfs_metadataurl_href|wfs_metadataurl_type|wfs_name|wfs_namespace_prefix|wfs_namespace_uri|wfs_onlineresource|wfs_return_srs_as_urn|wfs_service_onlineresource|wfs_srs|wfs_storedqueries|wfs_title|wfs_typename|wfs_version|wms_abstract|wms_accessconstraints|wms_address|wms_addresstype|wms_allowed_ip_list|wms_attribution_logourl_format|wms_attribution_logourl_height|wms_attribution_logourl_href|wms_attribution_logourl_width|wms_attribution_onlineresource|wms_attribution_title|wms_authorityurl_href|wms_authorityurl_name|wms_bbox_extended|wms_city|wms_contactelectronicmailaddress|wms_contactfacsimiletelephone|wms_contactorganization|wms_contactperson|wms_contactposition|wms_contactvoicetelephone|wms_country|wms_dataurl_format|wms_dataurl_href|wms_denied_ip_list|wms_enable_request|wms_encoding|wms_exclude_items|wms_extent|wms_feature_info_mime_type|wms_fees|wms_format|wms_getcapabilities_version|wms_getfeatureinfo_formatlist|wms_getlegendgraphic_formatlist|wms_getmap_formatlist|wms_group_abstract|wms_group_title|wms_identifier_authority|wms_identifier_value|wms_include_items|wms_keywordlist|wms_keywordlist_[a-z_]+_items|wms_keywordlist_vocabulary|wms_languages|wms_layer_group|wms_layerlimit|wms_metadataurl_format|wms_metadataurl_href|wms_metadataurl_type|wms_name|wms_onlineresource|wms_opaque|wms_postcode|wms_proxy_host|wms_proxy_port|wms_remote_sld_max_bytes|wms_resx|wms_resy|wms_rootlayer_abstract|wms_rootlayer_keywordlist|wms_essential|wms_rootlayer_title|wms_server_version|wms_service_onlineresource|wms_sld_url|wms_srs|wms_stateorprovince|wms_style|wms_style_[a-z_]+_legendurl_format|wms_style_[a-z_]+_legendurl_height|wms_style_[a-z_]+_legendurl_href|wms_style_[a-z_]+_legendurl_width|wms_timedefault|wms_timeextent|wms_timeformat|wms_timeitem|wms_title)\\b",
+              "name": "constant.character.escape.mapserver"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.mapserver",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.mapserver",
+              "match": "\\\\."
+            },  
+            {
+              "match": "\\b(angle|bbox_pixel_is_point|gml_[a-z_]+_alias|gml_[a-z_]+_group|gml_[a-z_]+_occurances|gml_[a-z_]+_precision|gml_[a-z_]+_type|gml_[a-z_]+_value|gml_[a-z_]+_width|gml_constants|gml_default_items|gml_exclude_items|gml_featureid|gml_geometries|gml_groups|gml_include_items|gml_mandatory_items|gml_optional_items|gml_types|gml_xml_items|labelcache_map_edge_buffer|ms_enable_modes|ows_allowed_ip_list|ows_denied_ip_list|ows_enable_request|ows_http_max_age|ows_language|ows_onlineresource|ows_schemas_location|ows_sld_enabled|ows_srs|ows_title|ows_updatesequence|radius|sos_[a-z_]+_alias|sos_[a-z_]+_definition|sos_[a-z_]+_uom|sos_abstract|sos_accessconstraints|sos_address|sos_addresstype|sos_allowed_ip_list|sos_city|sos_contactelectronicmailaddress|sos_contactfacsimiletelephone|sos_contactinstructions|sos_contactorganization|sos_contactperson|sos_contactposition|sos_contactvoicetelephone|sos_country|sos_denied_ip_list|sos_describesensor_url|sos_enable_request|sos_encoding_blockSeparator|sos_encoding_tokenSeparator|sos_fees|sos_hoursofservice|sos_keywordlist|sos_maxfeatures|sos_observedproperty_authority|sos_observedproperty_id|sos_observedproperty_name|sos_observedproperty_version|sos_offering_description|sos_offering_extent|sos_offering_id|sos_offering_intendedapplication|sos_offering_name|sos_offering_timeextent|sos_onlineresource|sos_postcode|sos_procedure|sos_procedure_item|sos_role|sos_service_onlineresource|sos_srs|sos_stateorprovince|sos_timeitem|sos_title|wcs_abstract|wcs_accessconstraints|wcs_address|wcs_allowed_ip_list|wcs_city|wcs_contactelectronicmailaddress|wcs_contactfacimiletelephone|wcs_contactorganization|wcs_contactperson|wcs_contactposition|wcs_contactvoicetelephone|wcs_country|wcs_denied_ip_list|wcs_description|wcs_enable_request|wcs_extent|wcs_fees|wcs_formats|wcs_keywords|wcs_label|wcs_metadatalink_format|wcs_metadatalink_href|wcs_metadatalink_type|wcs_name|wcs_native_format|wcs_nativeformat|wcs_postcode|wcs_rangeset_axes|wcs_rangeset_label|wcs_rangeset_name|wcs_responsibleparty_address_administrativearea|wcs_responsibleparty_address_city|wcs_responsibleparty_address_country|wcs_responsibleparty_address_deliverypoint|wcs_responsibleparty_address_electronicmailaddress|wcs_responsibleparty_address_postalcode|wcs_responsibleparty_individualname|wcs_responsibleparty_onlineresource|wcs_responsibleparty_organizationname|wcs_responsibleparty_phone_facsimile|wcs_responsibleparty_phone_voice|wcs_responsibleparty_postionname|wcs_service_onlineresource|wcs_srs|wcs_stateorprovince|wcs_timeitem|wcs_timeposition|wfs_[a-z_]+_filedef|wfs_[a-z_]+_inlinedef|wfs_abstract|wfs_accessconstraints|wfs_allowed_ip_list|wfs_auth_[a-z_]+|wfs_enable_request|wfs_compute_number_matched|wfs_denied_ip_list|wfs_encoding|wfs_extent|wfs_feature_collection|wfs_featureid|wfs_fees|wfs_getcapabilities_version|wfs_getfeature_formatlist|wfs_include_items|wfs_keywordlist|wfs_languages|wfs_maxfeatures|wfs_metadataurl_about|wfs_metadataurl_format|wfs_metadataurl_href|wfs_metadataurl_type|wfs_name|wfs_namespace_prefix|wfs_namespace_uri|wfs_onlineresource|wfs_return_srs_as_urn|wfs_service_onlineresource|wfs_srs|wfs_storedqueries|wfs_title|wfs_typename|wfs_version|wms_abstract|wms_accessconstraints|wms_address|wms_addresstype|wms_allowed_ip_list|wms_attribution_logourl_format|wms_attribution_logourl_height|wms_attribution_logourl_href|wms_attribution_logourl_width|wms_attribution_onlineresource|wms_attribution_title|wms_authorityurl_href|wms_authorityurl_name|wms_bbox_extended|wms_city|wms_contactelectronicmailaddress|wms_contactfacsimiletelephone|wms_contactorganization|wms_contactperson|wms_contactposition|wms_contactvoicetelephone|wms_country|wms_dataurl_format|wms_dataurl_href|wms_denied_ip_list|wms_enable_request|wms_encoding|wms_exclude_items|wms_extent|wms_feature_info_mime_type|wms_fees|wms_format|wms_getcapabilities_version|wms_getfeatureinfo_formatlist|wms_getlegendgraphic_formatlist|wms_getmap_formatlist|wms_group_abstract|wms_group_title|wms_identifier_authority|wms_identifier_value|wms_include_items|wms_keywordlist|wms_keywordlist_[a-z_]+_items|wms_keywordlist_vocabulary|wms_languages|wms_layer_group|wms_layerlimit|wms_metadataurl_format|wms_metadataurl_href|wms_metadataurl_type|wms_name|wms_onlineresource|wms_opaque|wms_postcode|wms_proxy_host|wms_proxy_port|wms_remote_sld_max_bytes|wms_resx|wms_resy|wms_rootlayer_abstract|wms_rootlayer_keywordlist|wms_essential|wms_rootlayer_title|wms_server_version|wms_service_onlineresource|wms_sld_url|wms_srs|wms_stateorprovince|wms_style|wms_style_[a-z_]+_legendurl_format|wms_style_[a-z_]+_legendurl_height|wms_style_[a-z_]+_legendurl_href|wms_style_[a-z_]+_legendurl_width|wms_timedefault|wms_timeextent|wms_timeformat|wms_timeitem|wms_title)\\b",
+             "name": "constant.character.escape.mapserver"
+            }
+          ]
+        }
+      
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.mapserver",
+          "match": "(?i)\\b(AUTO|ON|OFF|TRUE|FALSE|YES|NO|POINT|LINE|POLYGON|RASTER|ANNOTATION|CIRCLE|QUERY|CHART|GRID|INLINE|POLYFILL|MITER|ROUND|BEVEL|BUTT|SQUARE|UL|UC|UR|CL|CC|CR|LL|LC|LR|FOLLOW|NONE|HILITE|SELECTED|AUTO|METERS|FEET|INCHES|KILOMETERS|MILES|NAUTICALMILES|DD|PIXELS|PERCENTAGE|UTM|ALPHA|SIMPLE|HATCH|GRADIENT|MULTIPLE|FEATURE|QUERY|INDEXQUERY|ALL|MULTIPLE|SELECTED|SINGLE|FEATUREIMAGETYPE|TILE|LIBRARY)\\b"
+        },
+        {
+          "name": "support.constant.mapserver",
+          "match": "(?i)\\b(MS_TRUE|MS_FALSE|MS_DEBUGLEVEL|MS_VERSION|MS_ENCRYPTION_KEY)\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.logical.mapserver",
+          "match": "(?i)\\b(AND|OR|NOT)\\b"
+        },
+        {
+          "name": "keyword.operator.comparison.mapserver",
+          "match": "(=|!=|<>|>|<|>=|<=)"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.mapserver",
+          "match": "\\b[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.hex.mapserver",
+          "match": "\\b0x[0-9A-Fa-f]+\\b"
+        }
+      ]
+    }
+  }
+}

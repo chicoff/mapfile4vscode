@@ -1,0 +1,66 @@
+{
+	"name": "mapfile",
+	"displayName": "Mapfile Syntax",
+	"description": "Colors for UMN Mapserver configuration files",
+	"version": "0.4.0",
+	"publisher": "chicoff",
+	"main": "./extension.js",
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"license": "MIT",
+	"icon": "images/icon.png",
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "mapserver",
+				"aliases": [
+					"MapServer",
+					"UMN MapServer"
+				],
+				"extensions": [
+					".map"
+				],
+				"configuration": "./language-configuration.json"
+			},
+			{
+				"id": "symbolset",
+				"aliases": [
+					"UMN MapServer symbolset file"
+				],
+				"extensions": [
+					".sym"
+				],
+				"configuration": "./language-configuration_sym.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "mapserver",
+				"scopeName": "source.mapserver",
+				"path": "./syntaxes/MapServer.json"
+			},
+			{
+				"language": "symbolset",
+				"scopeName": "source.mapserver",
+				"path": "./syntaxes/MapServer.json"
+			}
+		],
+		"configurationDefaults": {
+			"[mapserver]": {
+				"editor.insertSpaces": true,
+				"editor.tabSize": 4,
+				"editor.detectIndentation": false,
+				"editor.autoIndent": "full"
+			}
+		}
+	},
+	"__metadata": {
+		"installedTimestamp": 1744477094163,
+		"targetPlatform": "undefined",
+		"size": 50746
+	}
+}
