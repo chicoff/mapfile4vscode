@@ -23,12 +23,12 @@
       ["'", "'"]
     ],
     "indentationRules": {
-      "increaseIndentPattern": "^\\s*(SYMBOLSET|POINTS|SYMBOL)\\b(?!.*\\bEND\\b",
+      "increaseIndentPattern": "^\\s*(SYMBOLSET|POINTS|SYMBOL)\\b(?!.*\\bEND\\b)",
       "decreaseIndentPattern": "^\\s*END\\b"
     },
     "folding": {
       "markers": {
-        "start": "^\\s*(SYMBOLSET|POINTS|SYMBOL)\\b(?!.*\\bEND\\b",
+        "start": "^\\s*(SYMBOLSET|POINTS|SYMBOL)\\b(?!.*\\bEND\\b)",
         "end": "^\\s*END\\b"
       }
     }

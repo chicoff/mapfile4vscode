@@ -39,3 +39,6 @@ All notable changes to the "mapfile" extension will be documented in this file.
 
 ## [0.4.0] - 2025-04-12
 - Added Breadcrumbs
+
+## [0.4.1] - 2025-04-13
+- Solved bugs with breadcrumbs, improved performance
