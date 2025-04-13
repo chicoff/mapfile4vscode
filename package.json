@@ -2,7 +2,7 @@
 	"name": "mapfile",
 	"displayName": "Mapfile Syntax",
 	"description": "Colors for UMN Mapserver configuration files",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"publisher": "chicoff",
 	"main": "./extension.js",
 	"engines": {

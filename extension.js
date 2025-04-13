@@ -9,6 +9,16 @@ function getParsed(document) {
     return parseCache.get(document);
 }
 
+function isLineOnlyKeyword(text, keyword) {
+    // Rimuove tutti i commenti di tipo /* ... */ (possono anche essere multilinea, ma qui guardiamo una riga sola)
+    const noBlockComments = text.replace(/\/\*.*?\*\//g, '');
+    // Rimuove tutto dopo un commento lineare con #
+    const noInlineComments = noBlockComments.split('#')[0];
+    // Controlla che resti solo la keyword (e spazi)
+    const pattern = new RegExp(`^\\s*${keyword}\\s*$`, 'i');
+    return pattern.test(noInlineComments);
+}
+
 function parseMapfile(document) {
     const edits = [];
     const colors = [];
@@ -40,17 +50,17 @@ function parseMapfile(document) {
             }
         }
 
-    
+
         if (language === 'symbolset') {
             if (/^(SYMBOL)\b/i.test(text) &&
                 !/(^|\s)END(\s|$)/i.test(text)) {
                 indentLevel++;
             }
-        }else if (language === 'mapserver') {
+        } else if (language === 'mapserver') {
             if (/^(CLASS|CLUSTER|COMPOSITE|CONNECTIONOPTIONS|FEATURE|GRID|JOIN|LABEL|LAYER|LEADER|LEGEND|MAP|METADATA|OUTPUTFORMAT|PATTERN|POINTS|PROJECTION|QUERYMAP|REFERENCE|SCALEBAR|SCALETOKEN|STYLE|VALIDATION|WEB)\b/i.test(text) &&
                 !/(^|\s)END(\s|$)/i.test(text)) {
                 indentLevel++;
-            }else if (/^\s*SYMBOL\s*$/i.test(text)) {
+            } else if (isLineOnlyKeyword(text, "SYMBOL")) {
                 indentLevel++;
             }
         }
@@ -106,11 +116,11 @@ function parseMapfile(document) {
             'METADATA', 'OUTPUTFORMAT', 'WEB', 'LEADER',
             'SCALEBAR', 'REFERENCE', 'QUERYMAP', 'CLUSTER', 'COMPOSITE',
             'CONNECTIONOPTIONS', 'GRID', 'JOIN', 'LEGEND', 'FEATURE',
-             'POINTS', 'SCALETOKEN', 'VALIDATION'
+            'POINTS', 'SYMBOL', 'SCALETOKEN', 'VALIDATION'
         ]);
-        
+
         const nameRegex = /^\s*NAME\s+["']([^"']+)["']/i;
-        
+
         if (/^\s*END\b/i.test(text) && stack.length > 0) {
             const current = stack.pop();
             const endPos = new vscode.Position(i, lineObj.text.length);
@@ -123,35 +133,36 @@ function parseMapfile(document) {
             if (match) {
                 const blockType = match[1].toUpperCase();
                 if (blockKeywords.has(blockType)) {
-                    const startPos = new vscode.Position(i, 0);
-                    const symbolKind =
-                        blockType === 'CLASS' ? vscode.SymbolKind.Method :
-                        blockType === 'STYLE' || blockType === 'LABEL' ? vscode.SymbolKind.Struct :
-                        vscode.SymbolKind.Class;
-        
-                    const symbol = new vscode.DocumentSymbol(
-                        blockType, '', symbolKind,
-                        new vscode.Range(startPos, startPos), // sarà aggiornato a END
-                        new vscode.Range(startPos, startPos)
-                    );
-        
-                    // Collegalo al genitore se esiste
-                    if (stack.length > 0) {
-                        const parent = stack[stack.length - 1];
-                        parent.symbol.children.push(symbol);
-                    } else {
-                        symbols.push(symbol);
+                    const isStandalone = isLineOnlyKeyword(lineObj.text, blockType);
+
+                    if (isStandalone) {
+                        const startPos = new vscode.Position(i, 0);
+                        const symbolKind =
+                            blockType === 'CLASS' ? vscode.SymbolKind.Method :
+                                blockType === 'STYLE' || blockType === 'LABEL' ? vscode.SymbolKind.Struct :
+                                    vscode.SymbolKind.Class;
+
+                        const symbol = new vscode.DocumentSymbol(
+                            blockType, '', symbolKind,
+                            new vscode.Range(startPos, startPos),
+                            new vscode.Range(startPos, startPos)
+                        );
+
+                        if (stack.length > 0) {
+                            const parent = stack[stack.length - 1];
+                            parent.symbol.children.push(symbol);
+                        } else {
+                            symbols.push(symbol);
+                        }
+
+                        stack.push({
+                            type: blockType,
+                            startLine: i,
+                            symbol
+                        });
                     }
-        
-                    stack.push({
-                        type: blockType,
-                        startLine: i,
-                        symbol
-                    });
                 }
             }
-        
-            // Aggiorna il nome nel blocco corrente (per breadcrumb)
             const nameMatch = text.match(nameRegex);
             if (nameMatch && nameMatch[1] && stack.length > 0) {
                 for (let j = stack.length - 1; j >= 0; j--) {
@@ -164,7 +175,6 @@ function parseMapfile(document) {
             }
         }
     }
-
     return { edits, colors, symbols };
 }
 

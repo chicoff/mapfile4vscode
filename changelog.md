@@ -42,3 +42,6 @@ All notable changes to the "mapfile" extension will be documented in this file.
 
 ## [0.4.1] - 2025-04-13
 - Solved bugs with breadcrumbs, improved performance
+
+## [0.4.2] - 2025-04-13
+- Improved management of the double meaning of the keyword “SYMBOL”
