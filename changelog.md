@@ -45,3 +45,6 @@ All notable changes to the "mapfile" extension will be documented in this file.
 
 ## [0.4.2] - 2025-04-13
 - Improved management of the double meaning of the keyword “SYMBOL”
+
+## [0.4.3] - 2025-04-14
+- Added Snippets

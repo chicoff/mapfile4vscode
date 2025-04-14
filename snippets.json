@@ -1,0 +1,46 @@
+{
+   "metadata": {
+		"prefix": "metadata",
+		"body": [
+			"METADATA\r",
+			"       \"wms_enable_request\" \"*\"\r",
+			"       \"wms_include_items\" \"all\"\r",
+			"       \"gml_include_items\" \"all\"\r",
+			"       \"gml_geometries\" \"geom_gml\"\r",
+			"       \"gml_geom_gml_type\" \"polygon\"\r",
+			"   END"
+		],
+		"description": "metadata snippet"
+	},
+	"debug": {
+		"prefix": "debug",
+		"body": [
+			"CONFIG \"MS_ERRORFILE\" \"./ms_error.txt\"\r",
+			"    DEBUG 5\r",
+			"    CONFIG \"CPL_DEBUG\" \"ON\"\r",
+			"    CONFIG \"CPL_TIMESTAMP\" \"ON\""
+		],
+		"description": "debug snippet"
+	},
+	"subquery": {
+		"prefix": "subquery",
+		"body": [
+			"DATA \"geom from (SELECT * from table) AS sub USING UNIQUE uuid USING SRID=2056\"\r"
+		],
+		"description": "subquery snippet"
+	},
+	"defer": {
+		"prefix": "defer",
+		"body": [
+			"PROCESSING \"CLOSE_CONNECTION=DEFER\"\r"
+		],
+		"description": "defer snippet"
+	},
+	"template": {
+		"prefix": "defetemplater",
+		"body": [
+			"TEMPLATE \"ttt.htm\"\r"
+		],
+		"description": "template snippet"
+	}
+}

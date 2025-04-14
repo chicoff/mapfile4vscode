@@ -2,7 +2,7 @@
 	"name": "mapfile",
 	"displayName": "Mapfile Syntax",
 	"description": "Colors for UMN Mapserver configuration files",
-	"version": "0.4.2",
+	"version": "0.4.3",
 	"publisher": "chicoff",
 	"main": "./extension.js",
 	"engines": {
@@ -10,8 +10,18 @@
 	},
 	"license": "MIT",
 	"icon": "images/icon.png",
+	"keywords": [
+		"UMN Mapserver",
+		"Mapfile",
+		"Symbolset"
+	],
 	"categories": [
-		"Programming Languages"
+		"Programming Languages",
+		"Language Packs",
+		"Formatters",
+		"Snippets",
+		"Data Science", 
+		"Visualization"
 	],
 	"contributes": {
 		"languages": [
@@ -49,6 +59,12 @@
 				"path": "./syntaxes/MapServer.json"
 			}
 		],
+		"snippets": [
+			{
+				"language": "mapserver",
+				"path": "./snippets.json"
+			}
+		],
 		"configurationDefaults": {
 			"[mapserver]": {
 				"editor.insertSpaces": true,
@@ -62,5 +78,9 @@
 		"installedTimestamp": 1744477094163,
 		"targetPlatform": "undefined",
 		"size": 50746
+	},
+	"dependencies": {
+		"n": "^10.1.0",
+		"stable": "^0.1.8"
 	}
 }
