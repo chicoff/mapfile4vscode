@@ -115,7 +115,7 @@ function parseMapfile(document) {
             'MAP', 'LAYER', 'CLASS', 'STYLE', 'LABEL', 'PROJECTION',
             'METADATA', 'OUTPUTFORMAT', 'WEB', 'LEADER',
             'SCALEBAR', 'REFERENCE', 'QUERYMAP', 'CLUSTER', 'COMPOSITE',
-            'CONNECTIONOPTIONS', 'GRID', 'JOIN', 'LEGEND', 'FEATURE',
+            'CONNECTIONOPTIONS', 'GRID', 'JOIN', 'LEGEND', 'FEATURE', 'PATTERN',
             'POINTS', 'SYMBOL', 'SCALETOKEN', 'VALIDATION'
         ]);
 
