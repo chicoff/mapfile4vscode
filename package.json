@@ -78,9 +78,5 @@
 		"installedTimestamp": 1744477094163,
 		"targetPlatform": "undefined",
 		"size": 50746
-	},
-	"dependencies": {
-		"n": "^10.1.0",
-		"stable": "^0.1.8"
 	}
 }
