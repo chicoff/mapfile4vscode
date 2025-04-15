@@ -199,14 +199,14 @@ function activate(context) {
                 const b = Math.round(color.blue * 255);
 
                 const hex = `${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`.toUpperCase();
-                if (originalText.includes("COLOR")) {
-                    return [new vscode.ColorPresentation(`COLOR ${r} ${g} ${b}`)];
+                if (originalText.includes("SHADOWCOLOR")) {
+                    return [new vscode.ColorPresentation(`SHADOWCOLOR ${r} ${g} ${b}`)];
                 } else if (originalText.includes("OUTLINECOLOR")) {
                     return [new vscode.ColorPresentation(`OUTLINECOLOR ${r} ${g} ${b}`)];
                 } else if (originalText.includes("BACKGROUNDCOLOR")) {
                     return [new vscode.ColorPresentation(`BACKGROUNDCOLOR ${r} ${g} ${b}`)];
-                } else if (originalText.includes("SHADOWCOLOR")) {
-                    return [new vscode.ColorPresentation(`SHADOWCOLOR ${r} ${g} ${b}`)];
+                } else if (originalText.includes("COLOR")) {
+                    return [new vscode.ColorPresentation(`COLOR ${r} ${g} ${b}`)];
                 } else {
                     return [new vscode.ColorPresentation(`#${hex}`)];
                 }

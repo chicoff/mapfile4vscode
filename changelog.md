@@ -48,3 +48,10 @@ All notable changes to the "mapfile" extension will be documented in this file.
 
 ## [0.4.3] - 2025-04-14
 - Added Snippets
+
+## [0.4.4] - 2025-04-15
+- Solved bug with hex colors
+
+## [0.4.5] - 2025-04-15
+- Solved bug with rgb colors
+
