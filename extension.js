@@ -208,7 +208,7 @@ function activate(context) {
                 } else if (originalText.includes("SHADOWCOLOR")) {
                     return [new vscode.ColorPresentation(`SHADOWCOLOR ${r} ${g} ${b}`)];
                 } else {
-                    return [new vscode.ColorPresentation(`'#${hex}'`)];
+                    return [new vscode.ColorPresentation(`#${hex}`)];
                 }
             }
         })
