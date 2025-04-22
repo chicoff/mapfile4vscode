@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const { wmsToShp2img } = require('./src/wmsUtils');
 
 const parseCache = new WeakMap();
 
@@ -225,6 +226,73 @@ function activate(context) {
     vscode.workspace.onDidChangeTextDocument(e => {
         parseCache.delete(e.document);
     });
+    let disposable = vscode.commands.registerCommand('chicoff.convertWmsToShp2img', async function() {
+        try {
+            // Ask user to enter the WMS URL
+            const wmsUrl = await vscode.window.showInputBox({
+                placeHolder: 'Enter the WMS URL to convert',
+                prompt: 'WMS URL to convert to shp2img command'
+            });
+            
+            if (!wmsUrl) {
+                return; // User cancelled
+            }
+            
+            // Convert URL to shp2img command
+            const shp2imgCmd = wmsToShp2img(wmsUrl);
+            
+            // Show the result
+            const action = await vscode.window.showInformationMessage(
+                `Converted command:\n${shp2imgCmd}`, 
+                'Copy to clipboard', 'Insert into editor', 'Run command'
+            );
+            
+            // Handle selected action
+            if (action === 'Copy to clipboard') {
+                await vscode.env.clipboard.writeText(shp2imgCmd);
+            } else if (action === 'Insert into editor') {
+                const editor = vscode.window.activeTextEditor;
+                if (editor) {
+                    editor.edit((editBuilder) => {
+                        editBuilder.insert(editor.selection.active, shp2imgCmd);
+                    });
+                }
+            } else if (action === 'Run command') {
+                // Create a terminal and run the command
+                const terminal = vscode.window.createTerminal('MapServer Debug');
+                terminal.show();
+                terminal.sendText(shp2imgCmd);
+            }
+        } catch (error) {
+            vscode.window.showErrorMessage(`Error: ${error.message}`);
+        }
+    });
+    
+    context.subscriptions.push(disposable);
+    
+    // Optionally add a command to convert selected text
+    let convertSelectionCmd = vscode.commands.registerTextEditorCommand(
+        'chicoff.convertSelectedWmsToShp2img', 
+        function(textEditor, edit) {
+            const selection = textEditor.selection;
+            const text = textEditor.document.getText(selection);
+            
+            if (!text) {
+                vscode.window.showInformationMessage('Select a WMS URL before using this command');
+                return;
+            }
+            
+            try {
+                const shp2imgCmd = wmsToShp2img(text);
+                // Replace selection with generated command
+                edit.replace(selection, shp2imgCmd);
+            } catch (error) {
+                vscode.window.showErrorMessage(`Error: ${error.message}`);
+            }
+        }
+    );
+    
+    context.subscriptions.push(convertSelectionCmd);
 }
 
 function deactivate() { }

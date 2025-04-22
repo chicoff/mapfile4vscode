@@ -55,3 +55,6 @@ All notable changes to the "mapfile" extension will be documented in this file.
 ## [0.4.5] - 2025-04-15
 - Solved bug with rgb colors
 
+## [0.5.0] - 2025-04-22
+- Converting WMS URL to map2img
+

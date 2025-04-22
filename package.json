@@ -2,7 +2,7 @@
 	"name": "mapfile",
 	"displayName": "Mapfile Syntax",
 	"description": "Colors for UMN Mapserver configuration files",
-	"version": "0.4.5",
+	"version": "0.5.0",
 	"publisher": "chicoff",
 	"main": "./extension.js",
 	"engines": {
@@ -72,11 +72,32 @@
 				"editor.detectIndentation": false,
 				"editor.autoIndent": "full"
 			}
+		},
+		"commands": [
+			{
+				"command": "chicoff.convertWmsToShp2img",
+				"title": "Convert WMS URL to shp2img command"
+			},
+			{
+				"command": "chicoff.convertSelectedWmsToShp2img",
+				"title": "Convert selected WMS URL to shp2img command"
 		}
-	},
-	"__metadata": {
-		"installedTimestamp": 1744477094163,
-		"targetPlatform": "undefined",
-		"size": 50746
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"when": "editorHasSelection",
+					"command": "chicoff.convertSelectedWmsToShp2img",
+					"group": "1_modification"
+				}
+			]
+		},
+		"keybindings": [
+			{
+				"command": "chicoff.convertWmsToShp2img",
+				"key": "ctrl+alt+w",
+				"mac": "cmd+alt+w"
+			}
+		]
 	}
 }
