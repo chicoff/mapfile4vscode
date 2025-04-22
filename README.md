@@ -23,14 +23,6 @@ The extension recognizes color values in your MapServer configuration files and 
 
 ### Code Snippets
 
-Speed up your work with MapServer using our extensive collection of snippets:
-
-- Common MapServer structure templates
-- Layer configurations for various data types
-- Class and style definitions
-- Symbol and label configurations
-- Complete examples for common web mapping scenarios
-
 Simply start typing to see available snippets or use the snippet picker (Ctrl+Space).
 
 ### Breadcrumbs
@@ -78,7 +70,7 @@ Convert a URL like:
 https://example.com/map=/path/test.map&LAYERS=test&FORMAT=image%2Fpng&SRS=EPSG%3A2056&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=2603760,1253358,2610271,1254986&WIDTH=4069&HEIGHT=1017
 ```
 
-To a shp2img debugging command:
+To a map2img debugging command:
 ```
 map2img -m /path/test.map -l test -e 2603760 1253358 2610271 1254986 -s 4069 1017
 ```

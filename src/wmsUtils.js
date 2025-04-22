@@ -40,7 +40,7 @@ function wmsToShp2img(wmsUrl) {
         }
         
         // Costruisci il comando shp2img
-        return `shp2img -m ${mapFile} -l ${layers} -e ${bboxCoords[0]} ${bboxCoords[1]} ${bboxCoords[2]} ${bboxCoords[3]} -s ${width} ${height}`;
+        return `map2img -m ${mapFile} -l ${layers} -e ${bboxCoords[0]} ${bboxCoords[1]} ${bboxCoords[2]} ${bboxCoords[3]} -s ${width} ${height}`;
     } catch (error) {
         throw new Error(`Error parsing WMS URL: ${error.message}`);
     }

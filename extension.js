@@ -231,7 +231,7 @@ function activate(context) {
             // Ask user to enter the WMS URL
             const wmsUrl = await vscode.window.showInputBox({
                 placeHolder: 'Enter the WMS URL to convert',
-                prompt: 'WMS URL to convert to shp2img command'
+                prompt: 'WMS URL to convert to map2img command'
             });
             
             if (!wmsUrl) {
